@@ -1,0 +1,34 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-5.5.0
+
+# NOTE: If you generated this yaml from an unprivileged and rootless podman container on an SELinux
+# enabled system, check the podman generate kube man page for steps to follow to ensure that your pod/container
+# has the right permissions to access the volumes added.
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2025-06-13T13:01:14Z"
+  labels:
+    app: podman-kube-play-web-1-pod
+  name: podman-kube-play-web-1-pod
+spec:
+  containers:
+  - args:
+    - apache2-foreground
+    image: docker.io/library/podman-kube-play-web:latest
+    name: podman-kube-play-web-1
+    ports:
+    - containerPort: 80
+      hostPort: 8080
+    volumeMounts:
+    - mountPath: /var/www/html
+      name: home-mheon-code-mario-talks-podman-kube-play-app-host-0
+  volumes:
+  - hostPath:
+      path: /home/mheon/code/mario_talks/podman-kube-play/app
+      type: Directory
+    name: home-mheon-code-mario-talks-podman-kube-play-app-host-0
+
